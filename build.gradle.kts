@@ -23,7 +23,9 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
   //  implementation("org.springframework.boot:spring-boot-starter-security") 시큐리티 설정
+    implementation ("org.springframework.security:spring-security-crypto:5.7.1")
     implementation("org.springframework.boot:spring-boot-starter-web")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

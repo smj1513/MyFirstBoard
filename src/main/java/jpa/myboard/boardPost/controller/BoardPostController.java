@@ -1,32 +1,34 @@
 package jpa.myboard.boardPost.controller;
 
 import jpa.myboard.boardPost.domain.BoardPost;
+import jpa.myboard.boardPost.dto.BoardDTO;
+import jpa.myboard.boardPost.dto.BoardListDTO;
 import jpa.myboard.boardPost.service.BoardPostService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-@RestController("/boardPost")
+@RestController
+@RequestMapping("/boardPost")
 @RequiredArgsConstructor
+@Log4j2
 public class BoardPostController {
+
 
 	private final BoardPostService boardPostService;
 
 	@GetMapping
-	public String redirection(){
+	public String redirection() {
 		return "redirect:/list";
 	}
 
 	@GetMapping("/list")
 	@ResponseStatus(HttpStatus.OK)
-	public List<BoardPost> list(){
-		List<BoardPost> posts = boardPostService.getAll();
-		posts.sort((post1, post2)-> post2.getCreatedAt().compareTo(post1.getCreatedAt()));
-		return posts;
+	public BoardDTO list(@RequestParam(name = "page") Integer pageNumber) {
+		return boardPostService.getPageData(pageNumber);
 	}
 }

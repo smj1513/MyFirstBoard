@@ -1,15 +1,15 @@
 package jpa.myboard.configuration;
 
-import jpa.myboard.security.MyPasswordEncoder;
-import jpa.myboard.security.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class AppConfig {
+public class SecurityConfig {
 
 	@Bean
 	public PasswordEncoder passwordEncoder(){
-		return new MyPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 }
